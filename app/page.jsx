@@ -40,6 +40,7 @@ export default function Home() {
     setEditingId(product.id);
     setForm({
       name: product.name,
+      category: product.category,
       description: product.description || '',
       price: product.price,
     });
@@ -111,8 +112,23 @@ export default function Home() {
               required
             />
           </div>
-
           <div className="form-row">
+            <label htmlFor="category">Kategori</label>
+            <select className='form-row'
+              id="category"
+              name="category"
+              value={form.category}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Pilih Kategori</option>
+              <option value="1">Makanan</option>
+              <option value="2">Kendaraan</option>
+              <option value="3">Gawai</option>
+            </select>
+          </div>
+
+          <div className="form-row input">
             <label htmlFor="description">Deskripsi</label>
             <textarea
               id="description"
@@ -160,6 +176,7 @@ export default function Home() {
         <thead>
           <tr>
             <th>Nama</th>
+            <th>Kategori</th>
             <th>Deskripsi</th>
             <th>Harga</th>
             <th>Aksi</th>
@@ -169,6 +186,7 @@ export default function Home() {
           {products.map((p) => (
             <tr key={p.id}>
               <td>{p.name}</td>
+              <td>{p.category}</td>
               <td>{p.description}</td>
               <td>Rp {Number(p.price).toLocaleString('id-ID')}</td>
               <td>
